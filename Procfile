@@ -1,1 +1,1 @@
-web: src/web
+web: src/web.go
