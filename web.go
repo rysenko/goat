@@ -6,11 +6,15 @@ import (
 	"os"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+func main() {
+	http.HandleFunc("/", hello)
+	fmt.Println("listening...")
+	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	if err != nil {
+		panic(err)
+	}
 }
 
-func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+func hello(res http.ResponseWriter, req *http.Request) {
+	fmt.Fprintln(res, "go")
 }
